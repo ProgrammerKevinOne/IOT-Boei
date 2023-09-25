@@ -19,11 +19,8 @@ void initializeTemperatureSensor()
  
 void measureTemperature(){ 
   // Call sensors.requestTemperatures() to issue a global temperature and Requests to all devices on the bus
-  sensors.requestTemperatures(); 
-  delay(2000);
+  sensors.requestTemperatures();
   Serial.print("Celsius temperature: ");
-  Serial.println(sensors.getTempCByIndex(0)); 
-  //Serial.print(" - Fahrenheit temperature: ");
-  //Serial.println(sensors.getTempFByIndex(0));
+  Serial.println(sensors.getTempCByIndex(0));
   
 }

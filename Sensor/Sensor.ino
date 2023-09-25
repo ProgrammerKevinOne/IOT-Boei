@@ -12,4 +12,6 @@ void loop()
    measureTDS();
    measureTemperature();
    measurePH();
+   Serial.println(" ");
+   delay(2000);
 }

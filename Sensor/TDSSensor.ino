@@ -78,9 +78,9 @@ static unsigned long analogSampleTimepoint = millis();
       //Serial.print("voltage:");
       //Serial.print(averageVoltage,2);
       //Serial.print("V   ");
-      Serial.print("TDS Value:");
+      Serial.print("TDS Value: ");
       Serial.print(tdsValue,0);
-      Serial.println("ppm");
+      Serial.println(" ppm");
    }
 
 }
