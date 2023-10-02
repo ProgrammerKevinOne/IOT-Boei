@@ -17,10 +17,11 @@ void initializeTemperatureSensor()
   sensors.begin();
 }
  
-void measureTemperature(){ 
+float measureTemperature(){ 
   // Call sensors.requestTemperatures() to issue a global temperature and Requests to all devices on the bus
   sensors.requestTemperatures();
   Serial.print("Celsius temperature: ");
   Serial.println(sensors.getTempCByIndex(0));
+  return sensors.getTempCByIndex(0);
   
 }

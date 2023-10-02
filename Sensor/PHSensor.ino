@@ -1,5 +1,3 @@
-#include <Wire.h>
-
 float calibration_value = 30.4;
 int phval = 0; 
 unsigned long int avgval; 
@@ -11,7 +9,7 @@ void initializePHSensor(){
 
 }
 
-void measurePH() {
+float measurePH() {
  for(int i=0;i<10;i++){ // Meet 10 keer
   buffer_arr[i]=analogRead(A1);
   delay(30);
@@ -35,4 +33,5 @@ void measurePH() {
 
   Serial.print("pH waarde: ");
   Serial.println(ph_act);
+  return ph_act;
 }

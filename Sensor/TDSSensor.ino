@@ -54,7 +54,7 @@ int getMedianNum(int bArray[], int iFilterLen)
       return bTemp;
 }
 
-void measureTDS(){
+float measureTDS(){
 
 static unsigned long analogSampleTimepoint = millis();
    if(millis()-analogSampleTimepoint > 40U)     //every 40 milliseconds,read the analog value from the ADC
@@ -81,6 +81,7 @@ static unsigned long analogSampleTimepoint = millis();
       Serial.print("TDS Value: ");
       Serial.print(tdsValue,0);
       Serial.println(" ppm");
+      return tdsValue;
    }
 
 }
