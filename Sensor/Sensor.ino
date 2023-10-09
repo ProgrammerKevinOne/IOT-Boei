@@ -22,7 +22,7 @@ void os_getArtEui (u1_t* buf) { }
 void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
 
-static uint8_t mydata[5];
+static uint8_t mydata[6];
 static osjob_t sendjob;
 
 // Schedule TX every this many seconds (might become longer due to duty
@@ -111,11 +111,12 @@ void do_send(osjob_t* j){
         int temp = measureTemperature()*10;
         int ph = measurePH()*10;
         int tds = measureTDS();
-        mydata[0] = tds;
-        mydata[1] = temp>>8;
-        mydata[2] = temp;
-        mydata[3] = ph>>8;
-        mydata[4] = ph;
+        mydata[0] = tds>>8;
+        mydata[1] = tds;
+        mydata[2] = temp>>8;
+        mydata[3] = temp;
+        mydata[4] = ph>>8;
+        mydata[5] = ph;
         LMIC_setTxData2(1, mydata, sizeof(mydata), 0);
         Serial.println(F("Packet queued"));
 

@@ -74,5 +74,5 @@ static unsigned long analogSampleTimepoint = millis();
   Serial.print(tdsValue,0);
   Serial.println(" ppm");
       
-
+  return tdsValue;
 }
