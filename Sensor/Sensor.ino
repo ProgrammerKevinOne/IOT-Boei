@@ -27,7 +27,7 @@ static osjob_t sendjob;
 
 // Schedule TX every this many seconds (might become longer due to duty
 // cycle limitations).
-const unsigned TX_INTERVAL = 60;
+const unsigned TX_INTERVAL = 1800;
 
 // Pin mapping
 const lmic_pinmap lmic_pins = {
@@ -112,7 +112,7 @@ void do_send(osjob_t* j){
         int ph = measurePH()*10;
         int tds = measureTDS();
         mydata[0] = tds;
-        mydata[1] = (temp)>>8;
+        mydata[1] = temp>>8;
         mydata[2] = temp;
         mydata[3] = ph>>8;
         mydata[4] = ph;
