@@ -57,31 +57,22 @@ int getMedianNum(int bArray[], int iFilterLen)
 float measureTDS(){
 
 static unsigned long analogSampleTimepoint = millis();
-   if(millis()-analogSampleTimepoint > 40U)     //every 40 milliseconds,read the analog value from the ADC
-   {
-     analogSampleTimepoint = millis();
-     analogBuffer[analogBufferIndex] = analogRead(TdsSensorPin);    //read the analog value and store into the buffer
-     analogBufferIndex++;
-     if(analogBufferIndex == SCOUNT) 
-         analogBufferIndex = 0;
-   }   
-   static unsigned long printTimepoint = millis();
-   if(millis()-printTimepoint > 800U)
-   {
-      printTimepoint = millis();
-      for(copyIndex=0;copyIndex<SCOUNT;copyIndex++)
-        analogBufferTemp[copyIndex]= analogBuffer[copyIndex];
-      averageVoltage = getMedianNum(analogBufferTemp,SCOUNT) * (float)VREF / 1024.0; // read the analog value more stable by the median filtering algorithm, and convert to voltage value
-      float compensationCoefficient=1.0+0.02*(temperature-25.0);    //temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
-      float compensationVoltage=averageVoltage/compensationCoefficient;  //temperature compensation
-      tdsValue=(133.42*compensationVoltage*compensationVoltage*compensationVoltage - 255.86*compensationVoltage*compensationVoltage + 857.39*compensationVoltage)*0.5; //convert voltage value to tds value
-      //Serial.print("voltage:");
-      //Serial.print(averageVoltage,2);
-      //Serial.print("V   ");
-      Serial.print("TDS Value: ");
-      Serial.print(tdsValue,0);
-      Serial.println(" ppm");
-      return tdsValue;
-   }
+  for(int i=0;i<SCOUNT;i++){
+    delay(40);
+    analogBuffer[i] = analogRead(TdsSensorPin);//fill analogBuffer with 30 measurement values. there is 40 ms between every measurement.
+  }
+
+
+      
+      
+  averageVoltage = getMedianNum(analogBuffer,SCOUNT) * (float)VREF / 1024.0; // read the analog value more stable by the median filtering algorithm, and convert to voltage value
+  float compensationCoefficient=1.0+0.02*(temperature-25.0);    //temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
+  float compensationVoltage=averageVoltage/compensationCoefficient;  //temperature compensation
+  tdsValue=(133.42*compensationVoltage*compensationVoltage*compensationVoltage - 255.86*compensationVoltage*compensationVoltage + 857.39*compensationVoltage)*0.5; //convert voltage value to tds value
+      
+  Serial.print("TDS Value: ");
+  Serial.print(tdsValue,0);
+  Serial.println(" ppm");
+      
 
 }
