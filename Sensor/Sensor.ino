@@ -1,6 +1,7 @@
 #include <lmic.h>
 #include <hal/hal.h>
 #include <SPI.h>
+#include "LowPower.h"
 
 // LoRaWAN NwkSKey, network session key
 // This is the default Semtech key, which is used by the early prototype TTN
@@ -25,9 +26,8 @@ void os_getDevKey (u1_t* buf) { }
 static uint8_t mydata[6];
 static osjob_t sendjob;
 
-// Schedule TX every this many seconds (might become longer due to duty
-// cycle limitations).
-const unsigned TX_INTERVAL = 30;
+int sleepcycles = 224; //every cycle is 8 sec
+bool sleeping = false;
 
 // Pin mapping
 const lmic_pinmap lmic_pins = {
@@ -69,6 +69,7 @@ void onEvent (ev_t ev) {
             Serial.println(F("EV_REJOIN_FAILED"));
             break;
         case EV_TXCOMPLETE:
+            sleeping = true;
             Serial.println(F("EV_TXCOMPLETE (includes waiting for RX windows)"));
             if (LMIC.txrxFlags & TXRX_ACK)
               Serial.println(F("Received ack"));
@@ -78,7 +79,8 @@ void onEvent (ev_t ev) {
               Serial.println(F(" bytes of payload"));
             }
             // Schedule next transmission
-            os_setTimedCallback(&sendjob, os_getTime()+sec2osticks(TX_INTERVAL), do_send);
+            //os_setTimedCallback(&sendjob, os_getTime()+sec2osticks(TX_INTERVAL), do_send);
+            delay(400);
             break;
         case EV_LOST_TSYNC:
             Serial.println(F("EV_LOST_TSYNC"));
@@ -206,5 +208,14 @@ void setup() {
 }
 
 void loop() {
-  os_runloop_once();
+  do_send(&sendjob);
+  while(sleeping == false)
+  {
+    os_runloop_once();
+  }
+  sleeping = false;
+  for (int i=0;i<sleepcycles;i++)
+  {
+      LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);    //sleep 8 seconds
+  }
 }
