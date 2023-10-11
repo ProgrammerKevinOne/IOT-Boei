@@ -17,7 +17,11 @@ void initializeTemperatureSensor() {
 
 float measureTemperature() {
   // Call sensors.requestTemperatures() to issue a global temperature and Requests to all devices on the bus
+
   sensors.requestTemperatures();
+  while (sensors.getTempCByIndex(0) > 50) {  //to prevent wrong values
+    sensors.requestTemperatures();
+  }
   Serial.print("Celsius temperature: ");
   Serial.println(sensors.getTempCByIndex(0));
   return sensors.getTempCByIndex(0);
