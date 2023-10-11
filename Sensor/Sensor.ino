@@ -28,6 +28,7 @@ static osjob_t sendjob;
 
 int sleepcycles = 112;  //every cycle is 8 sec
 bool sleeping = false;
+bool first = true;
 
 // Pin mapping
 const lmic_pinmap lmic_pins = {
@@ -204,11 +205,15 @@ void setup() {
 }
 
 void loop() {
+  if (first) { //Sleep the first 8 seconds because of wrong sensor value short after boot
+    LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+  }
   do_send(&sendjob);
   while (sleeping == false) {
     os_runloop_once();
   }
   sleeping = false;
+  first = false;
   for (int i = 0; i < sleepcycles; i++) {
     LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);  //sleep 8 seconds
   }
