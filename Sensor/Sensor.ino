@@ -26,7 +26,7 @@ void os_getDevKey(u1_t* buf) {}
 static uint8_t mydata[6];
 static osjob_t sendjob;
 
-int sleepcycles = 112;  //every cycle is 8 sec
+int sleepcycles = 110;  //every cycle is 8 sec
 bool sleeping = false;
 
 // Pin mapping
