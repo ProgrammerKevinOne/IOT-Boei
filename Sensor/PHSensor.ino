@@ -25,7 +25,7 @@ float measurePH() {
 
   avgval = 0;
   for (int i = 2; i < 8; i++)
-    avgval += buffer_arr[i];  //Pak gemiddelde van de pH waardes
+    avgval += buffer_arr[i];  //Pak de mediaan van de pH waardes
   float volt = (float)avgval * 5.0 / 1024 / 6;
   float ph_act = -5.70 * volt + calibration_value;
 
