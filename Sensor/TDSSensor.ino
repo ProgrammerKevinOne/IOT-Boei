@@ -64,7 +64,7 @@ float measureTDS() {
   tdsValue = (133.42 * compensationVoltage * compensationVoltage * compensationVoltage - 255.86 * compensationVoltage * compensationVoltage + 857.39 * compensationVoltage) * 0.5;  //convert voltage value to tds value
 
   Serial.print("TDS Value: ");
-  Serial.print(tdsValue, 0);
+  Serial.print(tdsValue, 1);
   Serial.println(" ppm");
 
   return tdsValue;

@@ -2,6 +2,7 @@
 #include <hal/hal.h>
 #include <SPI.h>
 #include "LowPower.h"
+#include <CayenneLPP.h>
 
 // LoRaWAN NwkSKey, network session key
 // This is the default Semtech key, which is used by the early prototype TTN
@@ -113,13 +114,30 @@ void do_send(osjob_t* j) {
     int temp = measureTemperature() * 10;
     int ph = measurePH() * 10;
     int tds = measureTDS();
-    mydata[0] = tds >> 8;
-    mydata[1] = tds;
-    mydata[2] = temp >> 8;
-    mydata[3] = temp;
-    mydata[4] = ph >> 8;
-    mydata[5] = ph;
-    LMIC_setTxData2(1, mydata, sizeof(mydata), 0);
+
+    byte payload[40];
+    uint8_t cursor = 0;
+    // Channel 1
+    payload[cursor++] = 0x00;
+    payload[cursor++] = LPP_LUMINOSITY;
+    payload[cursor++] = highByte(tds);
+    payload[cursor++] = lowByte(tds);
+
+    // Channel 2
+    payload[cursor++] = 0x01;
+    payload[cursor++] = LPP_TEMPERATURE;
+    payload[cursor++] = highByte(temp);
+    payload[cursor++] = lowByte(temp);
+
+    // Channel 3
+    payload[cursor++] = 0x02;
+    payload[cursor++] = LPP_TEMPERATURE;
+    payload[cursor++] = highByte(ph);
+    payload[cursor++] = lowByte(ph);
+
+    // Prepare upstream data transmission at the next possible time.
+    LMIC_setTxData2(1, payload, cursor, 0);
+
     Serial.println(F("Packet queued"));
   }
 
