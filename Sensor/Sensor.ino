@@ -27,7 +27,7 @@ void os_getDevKey(u1_t* buf) {}
 static uint8_t mydata[6];
 static osjob_t sendjob;
 
-int sleepcycles = 110;  //every cycle is 8 sec
+int sleepcycles = 3;  //every cycle is 8 sec
 bool sleeping = false;
 
 // Pin mapping
@@ -114,6 +114,7 @@ void do_send(osjob_t* j) {
     int temp = measureTemperature() * 10;
     int ph = measurePH() * 10;
     int tds = measureTDS();
+    int o2 = measureOxygen() *10;
 
     byte payload[40];
     uint8_t cursor = 0;
@@ -134,6 +135,12 @@ void do_send(osjob_t* j) {
     payload[cursor++] = LPP_TEMPERATURE;
     payload[cursor++] = highByte(ph);
     payload[cursor++] = lowByte(ph);
+
+    // Channel 4
+    payload[cursor++] = 0x03;
+    payload[cursor++] = LPP_TEMPERATURE;
+    payload[cursor++] = highByte(o2);
+    payload[cursor++] = lowByte(o2);
 
     // Prepare upstream data transmission at the next possible time.
     LMIC_setTxData2(1, payload, cursor, 0);
