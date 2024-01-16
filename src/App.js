@@ -9,9 +9,8 @@ import logo from './logo.svg';
 import './App.css';
 import Auth0ProviderWithHistory from './auth0Provider';
 
-const App = () => {
+function App() {
   return (
-    <Auth0ProviderWithHistory>
 
     <div className="App">
       <BrowserRouter>
@@ -24,7 +23,6 @@ const App = () => {
         </div>
       </BrowserRouter>
     </div>
-    </Auth0ProviderWithHistory>
   );
 }
 
