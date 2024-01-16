@@ -1,11 +1,11 @@
-const Home = ()=>{
+const Data = ()=>{
     return(
         <div>
             <h2>
-                Thuis
+                Data
             </h2>
         </div>
     )
 }
 
-export default Home
+export default Data
