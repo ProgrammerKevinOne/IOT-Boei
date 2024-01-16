@@ -5,9 +5,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Data from './pages/Data';
 import Navbar from './Components/Navbar';
+import logo from './logo.svg';
+import './App.css';
+import Auth0ProviderWithHistory from './auth0Provider';
 
-function App() {
+const App = () => {
   return (
+    <Auth0ProviderWithHistory>
+
     <div className="App">
       <BrowserRouter>
         <Navbar />
@@ -19,6 +24,7 @@ function App() {
         </div>
       </BrowserRouter>
     </div>
+    </Auth0ProviderWithHistory>
   );
 }
 
