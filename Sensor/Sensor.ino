@@ -115,6 +115,7 @@ void do_send(osjob_t* j) {
     int ph = measurePH() * 10;
     int tds = measureTDS();
     int o2 = measureOxygen() *10;
+    int bat = measureBattery();
 
     byte payload[40];
     uint8_t cursor = 0;
@@ -141,6 +142,12 @@ void do_send(osjob_t* j) {
     payload[cursor++] = LPP_TEMPERATURE;
     payload[cursor++] = highByte(o2);
     payload[cursor++] = lowByte(o2);
+
+    // Channel 5
+    payload[cursor++] = 0x04;
+    payload[cursor++] = LPP_LUMINOSITY;
+    payload[cursor++] = highByte(bat);
+    payload[cursor++] = lowByte(bat);
 
     // Prepare upstream data transmission at the next possible time.
     LMIC_setTxData2(1, payload, cursor, 0);
