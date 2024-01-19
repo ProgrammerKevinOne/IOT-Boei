@@ -1,27 +1,21 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { AdminPage } from "./pages/admin-page";
+import { HomePage } from "./pages/home-page";
+import { NotFoundPage } from "./pages/not-found-page";
+import { ProfilePage } from "./pages/profile-page";
+import { ProtectedPage } from "./pages/protected-page";
+import { PublicPage } from "./pages/public-page";
 
-import { NavBar, Footer } from "./components";
-import { Home, Profile, ExternalApi } from "./views";
-
-import "./app.css";
-
-const App = () => {
+export const App = () => {
   return (
-    <div id="app" className="d-flex flex-column h-100">
-      <NavBar />
-      <div className="container flex-grow-1">
-        <div className="mt-5">
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/external-api" component={ExternalApi} />
-          </Switch>
-        </div>
-      </div>
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/public" element={<PublicPage />} />
+      <Route path="/protected" element={<ProtectedPage />} />
+      <Route path="/admin" element={<AdminPage />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 };
-
-export default App;
