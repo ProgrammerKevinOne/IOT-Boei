@@ -4,10 +4,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 //pages and components
 import Home from './pages/Home';
 import Data from './pages/Data';
+import LiveData from './pages/LiveData';
 import Navbar from './Components/Navbar';
-import logo from './logo.svg';
-import './App.css';
-import Auth0ProviderWithHistory from './auth0Provider';
+
 
 function App() {
   return (
@@ -17,6 +16,7 @@ function App() {
         <Navbar />
         <div className='pages'>
           <Routes>
+            <Route path='/LiveData' element={<LiveData />} />
             <Route path='/Home' element={<Home />} />
             <Route path='/data' element={<Data />} />
           </Routes>
