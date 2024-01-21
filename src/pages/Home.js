@@ -1,10 +1,12 @@
 import water from '../assets/water.jpg'; // Adjust the path as needed
 import LoginButton from '../components/login';
 import LogoutButton from '../components/logout';
+import Profile from '../components/profile';
 
 const Home = () => {
   return (
     <>
+      <Profile></Profile>
       <LoginButton></LoginButton>
       <LogoutButton></LogoutButton>
       <div>
