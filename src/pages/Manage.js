@@ -39,10 +39,9 @@ const Manage = () => {
   return (
     <div>
       <h2>Manage</h2>
-      <select value={selectedDay} onChange={handleDayChange}>
-        <option value="2024-01-17">January 17, 2024</option>
+      <input type="date" value={selectedDay} onChange={handleDayChange} />
         {/* Add more options for other days here */}
-      </select>
+      
       {data && (
         <table>
           <thead>
