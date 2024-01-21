@@ -34,7 +34,7 @@ const Navbar = () => {
             <>
               <Link to="/Manage" style={{ marginRight: '20px' }} className="link">
                 <h3>
-                  Manage
+                  Beheer
                 </h3>
               </Link>
             </>
@@ -46,7 +46,7 @@ const Navbar = () => {
           )}
           {isAuthenticated && (
             <>
-              <div style={{ marginRight: '20px', marginTop: '20px' }}>
+              <div style={{ marginRight: '10px', marginTop: '15px' }}>
                 <LogoutButton />
               </div>
               <div style={{ marginTop: '5px' }}>

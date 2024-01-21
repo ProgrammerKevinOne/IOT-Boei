@@ -38,7 +38,7 @@ const Manage = () => {
 
   return (
     <div>
-      <h2>Manage</h2>
+      <h2>Beheer Sensor Data</h2>
       <input type="date" value={selectedDay} onChange={handleDayChange} />
         {/* Add more options for other days here */}
       

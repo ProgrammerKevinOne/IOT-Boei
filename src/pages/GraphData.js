@@ -135,11 +135,11 @@ const GraphData = () => {
     <div>
     <div>
       <label>
-        Start Date: &nbsp;
+        Start Datum: &nbsp;
         <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
       </label>
       <label>
-      &nbsp;End Date: &nbsp;
+      &nbsp;Eind Datum: &nbsp;
         <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
       </label>
     </div>

@@ -95,7 +95,7 @@ const LiveData = () => {
           <div>
             <h3>Datum</h3>
             <p>{predictionDate}</p>
-            <h3>Predicted Temperature</h3>
+            <h3>Voorspelde temperatuur</h3>
             <p>{predictedTemperature} °C</p>
             {/* rest of your code */}
   </div>
