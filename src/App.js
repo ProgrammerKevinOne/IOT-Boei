@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import GraphData from './pages/GraphData';
 import LiveData from './pages/LiveData';
-import Navbar from './Components/Navbar';
+import Navbar from './components/Navbar';
 import Manage from './pages/Manage';
 
 
