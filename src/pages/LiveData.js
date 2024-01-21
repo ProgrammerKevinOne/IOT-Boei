@@ -49,7 +49,7 @@ const LiveData = () => {
               <p>{tds} ppm</p>
             </div>
             <div>
-              <h3>zuurstofgehalte</h3>
+              <h3>Zuurstofgehalte</h3>
               <p>{oxygen} mg/L</p>
             </div>
             <div>

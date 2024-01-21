@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import GraphData from './pages/GraphData';
 import LiveData from './pages/LiveData';
 import Navbar from './Components/Navbar';
+import Manage from './pages/Manage';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route path='/LiveData' element={<LiveData />} />
             <Route path='/Home' element={<Home />} />
             <Route path='/GraphData' element={<GraphData />} />
+            <Route path='/Manage' element={<Manage />} />
           </Routes>
         </div>
       </BrowserRouter>

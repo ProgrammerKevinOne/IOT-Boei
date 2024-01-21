@@ -20,9 +20,14 @@ const Navbar = () => {
                 Grafiek Data
               </h3>
             </Link>
-            <Link to="/LiveData" className="link">
+            <Link to="/LiveData" style={{ marginRight: '20px' }} className="link">
               <h3>
                 Live Data
+              </h3>
+            </Link>
+            <Link to="/Manage" style={{ marginRight: '20px' }} className="link">
+              <h3>
+                Manage
               </h3>
             </Link>
           </div>
