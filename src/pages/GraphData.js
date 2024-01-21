@@ -9,7 +9,7 @@ import 'chartjs-adapter-date-fns';
 
 Chart.register(LineController, CategoryScale, LinearScale, PointElement, LineElement, TimeSeriesScale);
 
-const Data = () => {
+const GraphData = () => {
   const [sensorData, setSensorData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -170,4 +170,4 @@ const Data = () => {
   );
 };
 
-export default Data;
+export default GraphData;

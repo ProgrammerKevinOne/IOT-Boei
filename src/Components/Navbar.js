@@ -15,7 +15,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div style={{ width: '50%', display: 'flex', justifyContent: 'flex-end' }}>
-            <Link to="/Data" style={{ marginRight: '20px' }} className="link">
+            <Link to="/GraphData" style={{ marginRight: '20px' }} className="link">
               <h3>
                 Grafiek Data
               </h3>

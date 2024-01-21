@@ -3,7 +3,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 //pages and components
 import Home from './pages/Home';
-import Data from './pages/Data';
+import GraphData from './pages/GraphData';
 import LiveData from './pages/LiveData';
 import Navbar from './Components/Navbar';
 
@@ -19,7 +19,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/LiveData' element={<LiveData />} />
             <Route path='/Home' element={<Home />} />
-            <Route path='/data' element={<Data />} />
+            <Route path='/GraphData' element={<GraphData />} />
           </Routes>
         </div>
       </BrowserRouter>
