@@ -1,24 +1,8 @@
 import water from '../assets/water.jpg'; // Adjust the path as needed
-import LoginButton from '../components/login';
-import LogoutButton from '../components/logout';
-import Profile from '../components/profile';
-import { useAuth0 } from "@auth0/auth0-react";
 
 const Home = () => {
-  const { isAuthenticated } = useAuth0();
   return (
     <>
-      <Profile></Profile>
-      {!isAuthenticated && (
-        <>
-          <LoginButton />
-        </>
-      )}
-      {isAuthenticated && (
-        <>
-          <LogoutButton />
-        </>
-      )}
       <div>
         <h2>
           Aquathermie Den Bosch
