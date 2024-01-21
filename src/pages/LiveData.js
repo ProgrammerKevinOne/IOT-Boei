@@ -7,6 +7,8 @@ const LiveData = () => {
     const [ph, setPh] = useState(null);
     const [date, setDate] = useState(null);
     const [battery, setBattery] = useState(null);
+    const [predictedTemperature, setPredictedTemperature] = useState(null);
+    const [predictionDate, setPredictionDate] = useState(null);
   
     useEffect(() => {
       fetch('http://141.148.243.197:1880/get/sensordata')
@@ -30,6 +32,17 @@ const LiveData = () => {
           setBattery(mostRecentBattery);
         })
         .catch(error => console.error('Error:', error));
+
+        // Fetch the predicted temperature
+        fetch('http://141.148.243.197:1880/get/voorspellingdata/')
+        .then(response => response.json())
+        .then(data => {
+          const mostRecentPrediction = data[0];
+          setPredictedTemperature(mostRecentPrediction.data.voorspelde_temperatuur);
+          setPredictionDate(mostRecentPrediction.data.datum); // Set the prediction date
+        })
+        .catch(error => console.error('Error:', error));
+
     }, []);
   
     return (
@@ -79,6 +92,13 @@ const LiveData = () => {
           {battery < 20 ? 'De batterij van de boei is bijna leeg.' :
            'De batterij van de boei is vol genoeg.'}
           </div>
+          <div>
+            <h3>Datum</h3>
+            <p>{predictionDate}</p>
+            <h3>Predicted Temperature</h3>
+            <p>{predictedTemperature} °C</p>
+            {/* rest of your code */}
+  </div>
         </div>
       );
   };
