@@ -23,8 +23,12 @@ const Manage = () => {
   };
 
   const handleDelete = (_id) => {
-    fetch(`http://141.148.243.197:1880/delete/sensordata/${_id}`, {
+    fetch(`http://141.148.243.197:1880/delete/sensordata/`, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ _id: _id }),
     })
     .then(() => {
       setData(data.filter(item => item._id !== _id));
