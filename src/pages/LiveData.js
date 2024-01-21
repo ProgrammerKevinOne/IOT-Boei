@@ -72,10 +72,13 @@ const LiveData = () => {
           {oxygen < 3 ? 'Het zuurstof niveau is lager dan 3 mg/L, vissen kunnen hier moeilijk in overleven.' :
            'Het zuurstof niveau is hoger dan 3 mg/L, vissen kunnen hier in overleven.'}
           </div>
-          <div style={{  textAlign: 'left', marginTop: '20px' }}>
-            <h3>Battery {battery < 10 ? '🔌' : '🔋'}{battery} %</h3>
-              
-            </div>
+          <div style={{ fontSize: '50px', textAlign: 'left', marginTop: '20px' }}>
+           {battery < 20 ? '🔌' : '🔋'}{battery} %
+          </div>
+          <div style={{ fontSize: '20px', textAlign: 'left', marginTop: '20px' }}>
+          {battery < 20 ? 'De batterij van de boei is bijna leeg.' :
+           'De batterij van de boei is vol genoeg.'}
+          </div>
         </div>
       );
   };
