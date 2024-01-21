@@ -6,6 +6,7 @@ const LiveData = () => {
     const [oxygen, setOxygen] = useState(null);
     const [ph, setPh] = useState(null);
     const [date, setDate] = useState(null);
+    const [battery, setBattery] = useState(null);
   
     useEffect(() => {
       fetch('http://141.148.243.197:1880/get/sensordata')
@@ -20,11 +21,13 @@ const LiveData = () => {
           const mostRecentOxygen = data[data.length - 1].data.oxygen;
           const mostRecentPh = data[data.length - 1].data.phWaarde;
           const mostRecentDate = data[data.length - 1].data.time;
+          const mostRecentBattery = data[data.length - 1].data.battery;
           setTemperature(mostRecentTemperature);
           setTds(mostRecentTds);
           setOxygen(mostRecentOxygen);
           setPh(mostRecentPh);
           setDate(mostRecentDate);
+          setBattery(mostRecentBattery);
         })
         .catch(error => console.error('Error:', error));
     }, []);
@@ -69,6 +72,10 @@ const LiveData = () => {
           {oxygen < 3 ? 'Het zuurstof niveau is lager dan 3 mg/L, vissen kunnen hier moeilijk in overleven.' :
            'Het zuurstof niveau is hoger dan 3 mg/L, vissen kunnen hier in overleven.'}
           </div>
+          <div style={{  textAlign: 'left', marginTop: '20px' }}>
+            <h3>Battery {battery < 10 ? '🔌' : '🔋'}{battery} %</h3>
+              
+            </div>
         </div>
       );
   };
