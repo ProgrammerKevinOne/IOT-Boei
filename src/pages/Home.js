@@ -37,6 +37,8 @@ const Home = () => {
         <p style={{ width: '50%', height: 'auto' }}>
           De website bestaat uit drie onderdelen.
           Het eerste tablad weergeeft de thuispagina.
+          Het tweede tablad weergeeft de grafiek data van de boei.
+          Het derde tablad weergeeft de live data van de boei.
         </p>
       </div>
     </>
