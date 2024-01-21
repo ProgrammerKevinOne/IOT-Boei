@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom"
 import './Navbar.css';
 import druppel from '../assets/druppel.png';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
+  const { isAuthenticated } = useAuth0();
     return (
       <header>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -25,11 +27,15 @@ const Navbar = () => {
                 Live Data
               </h3>
             </Link>
-            <Link to="/Manage" style={{ marginRight: '20px' }} className="link">
-              <h3>
-                Manage
-              </h3>
-            </Link>
+            {isAuthenticated && (
+            <>
+              <Link to="/Manage" style={{ marginRight: '20px' }} className="link">
+                <h3>
+                  Manage
+                </h3>
+              </Link>
+            </>
+          )}
           </div>
         </div>
       </header>
