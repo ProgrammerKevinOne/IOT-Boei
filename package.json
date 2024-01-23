@@ -1,5 +1,4 @@
 {
-  "proxy": "http://141.148.243.197:1880",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
