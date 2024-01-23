@@ -28,10 +28,10 @@ const Manage = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ _id: _id }),
+      body: JSON.stringify({ _id: { $oid: _id } }), // Adjusted to match the provided structure
     })
     .then(() => {
-      setData(data.filter(item => item._id !== _id));
+      setData(data.filter(item => item._id.$oid !== _id)); // Adjusted to match the provided structure
     })
     .catch(error => console.error('Error:', error));
   };
