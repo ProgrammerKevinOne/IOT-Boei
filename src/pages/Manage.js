@@ -2,8 +2,11 @@
 import React, { useState, useEffect } from 'react';
 
 const Manage = () => {
+  const today = new Date();
+  const formattedToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
   const [data, setData] = useState(null);
-  const [selectedDay, setSelectedDay] = useState('2024-01-17');
+  const [selectedDay, setSelectedDay] = useState(formattedToday);
 
   useEffect(() => {
     fetch('http://141.148.243.197:1880/get/sensordata')
@@ -28,10 +31,10 @@ const Manage = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ _id: { $oid: _id } }), // Adjusted to match the provided structure
+      body: JSON.stringify({ _id: _id }),
     })
     .then(() => {
-      setData(data.filter(item => item._id.$oid !== _id)); // Adjusted to match the provided structure
+      setData(data.filter(item => item._id !== _id));
     })
     .catch(error => console.error('Error:', error));
   };
