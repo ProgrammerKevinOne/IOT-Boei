@@ -9,7 +9,7 @@ const Manage = () => {
   const [selectedDay, setSelectedDay] = useState(formattedToday);
 
   useEffect(() => {
-    fetch('http://141.148.243.197:1880/get/sensordata')
+    fetch('https://141.148.243.197:1880/get/sensordata')
       .then(response => response.json())
       .then(data => {
         const filteredData = data.filter(item => {
@@ -26,7 +26,7 @@ const Manage = () => {
   };
 
   const handleDelete = (_id) => {
-    fetch(`http://141.148.243.197:1880/delete/sensordata/`, {
+    fetch(`https://141.148.243.197:1880/delete/sensordata/`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

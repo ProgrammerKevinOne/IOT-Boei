@@ -11,7 +11,7 @@ const LiveData = () => {
     const [predictionDate, setPredictionDate] = useState(null);
   
     useEffect(() => {
-      fetch('http://141.148.243.197:1880/get/sensordata')
+      fetch('https://141.148.243.197:1880/get/sensordata')
         .then(response => response.json())
         .then(data => {
           // Sort the data array in ascending order by time
@@ -34,7 +34,7 @@ const LiveData = () => {
         .catch(error => console.error('Error:', error));
 
         // Fetch the predicted temperature
-        fetch('http://141.148.243.197:1880/get/voorspellingdata/')
+        fetch('https://141.148.243.197:1880/get/voorspellingdata/')
         .then(response => response.json())
         .then(data => {
           const mostRecentPrediction = data[0];
