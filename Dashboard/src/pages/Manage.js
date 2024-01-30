@@ -13,7 +13,7 @@ const Manage = () => {
       .then(response => response.json())
       .then(data => {
         const filteredData = data.filter(item => {
-          const itemDate = new Date(item.data.time);
+          var itemDate = new Date(item.data.time);
           return itemDate.toISOString().startsWith(selectedDay);
         });
         setData(filteredData);
@@ -38,12 +38,14 @@ const Manage = () => {
     })
     .catch(error => console.error('Error:', error));
   };
-
+  
   return (
     <div>
       <h2>Beheer Sensor Data</h2>
       <input type="date" value={selectedDay} onChange={handleDayChange} />
         {/* Add more options for other days here */}
+        
+          
       
       {data && (
         <table>
@@ -59,8 +61,11 @@ const Manage = () => {
               <th>Action</th>
             </tr>
           </thead>
+          
           <tbody>
+            
             {data.map((item, index) => (
+              
               <tr key={index}>
                 <td>{item.data.time}</td>
                 <td>{item.data.tds}</td>

@@ -57,7 +57,7 @@ const GraphData = () => {
   }
 
   const tdsData = {
-    labels: sensorData.map(d => format(new Date(d.data.time), 'yyyy-MM-dd HH:mm:ss')),
+    labels: sensorData.map(d => format(new Date(d.data.time), 'dd MMM yyyy HH:mm')),
     datasets: [
       {
         label: 'TDS',
@@ -73,7 +73,7 @@ const GraphData = () => {
   };
 
   const temperatureData = {
-    labels: sensorData.map(d => format(new Date(d.data.time), 'yyyy-MM-dd HH:mm:ss')),
+    labels: sensorData.map(d => format(new Date(d.data.time), 'dd MMM yyyy HH:mm')),
     datasets: [
       {
         label: 'temperature',
@@ -89,7 +89,7 @@ const GraphData = () => {
   };
 
   const phData = {
-    labels: sensorData.map(d => format(new Date(d.data.time), 'yyyy-MM-dd HH:mm:ss')),
+    labels: sensorData.map(d => format(new Date(d.data.time), 'dd MMM yyyy HH:mm')),
     datasets: [
       {
         label: 'zuurtegraad',
@@ -105,7 +105,7 @@ const GraphData = () => {
   };
 
   const oxygenData = {
-    labels: sensorData.map(d => format(new Date(d.data.time), 'yyyy-MM-dd HH:mm:ss')),
+    labels: sensorData.map(d => format(new Date(d.data.time), 'dd MMM yyyy HH:mm')),
     datasets: [
       {
         label: 'zuurstofgehalte',
