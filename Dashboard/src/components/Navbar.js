@@ -49,9 +49,11 @@ const Navbar = () => {
               <div style={{ marginRight: '10px', marginTop: '15px' }}>
                 <LogoutButton />
               </div>
-              <div style={{ marginTop: '5px' }}>
-              <Profile ></Profile>
-              </div>
+              <Link to="/Profile" style={{ marginRight: '20px' }} className="link">
+                <h4>
+                  <Profile />
+                </h4>
+              </Link>
             </>
           )}
         </div>
