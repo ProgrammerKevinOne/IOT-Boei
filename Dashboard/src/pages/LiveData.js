@@ -62,7 +62,7 @@ const LiveData = () => {
           <p>{date}</p>
         </div>
         <div>
-          <h3>Temperatuur</h3>
+          <h3>Water temperatuur</h3>
           <p>{temperature} °C</p>
         </div>
         <div>
@@ -101,7 +101,7 @@ const LiveData = () => {
           'De batterij van de boei is vol genoeg.'}
       </div>
       <div>
-        <h3>Voorspelde temperatuur</h3>
+        <h3>Voorspelde water temperatuur</h3>
         <p>Op {predictionDate} wordt het water ongeveer {predictedTemperature} °C</p>
       </div>
     </div>
