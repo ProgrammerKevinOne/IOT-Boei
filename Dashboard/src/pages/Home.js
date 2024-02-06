@@ -4,10 +4,6 @@ const Home = () => {
   return (
     <>
       <div style={{margin:'auto', width: '50%'}}>
-        <h2>
-          Aquathermie Den Bosch
-        </h2>
-
         <img src={water} alt="Water" style={{ width: '80%', height: 'auto' }} />
         <p style={{height: 'auto' }}>
           's-Hertogenbosch heeft veel water dat door de stad heen stroomt.
@@ -19,10 +15,9 @@ const Home = () => {
           Op deze website zullen de data worden weergeven die de boei verzameld.
         </p>
         <p style={{height: 'auto' }}>
-          De website bestaat uit drie onderdelen.
-          Het eerste tablad weergeeft de thuispagina.
-          Het tweede tablad weergeeft de grafiek data van de boei.
-          Het derde tablad weergeeft de live data van de boei.
+          De website bestaat uit twee onderdelen.
+          Het eerste tablad weergeeft de grafiek data van de boei.
+          Het tweede tablad weergeeft de live data van de boei.
         </p>
       </div>
     </>

@@ -55,7 +55,7 @@ const LiveData = () => {
 
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h2 style={{ color: '#333' }}>Live data</h2>
+      <h1 style={{ color: '#333' }}>Live data</h1>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
         <div>
           <h3>Datum</h3>
