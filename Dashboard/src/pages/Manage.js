@@ -33,20 +33,26 @@ const Manage = () => {
       },
       body: JSON.stringify({ _id: _id }),
     })
-    .then(() => {
-      setData(data.filter(item => item._id !== _id));
-    })
-    .catch(error => console.error('Error:', error));
+      .then(() => {
+        setData(data.filter(item => item._id !== _id));
+      })
+      .catch(error => console.error('Error:', error));
   };
-  
+  if (!data || data.length === 0) {
+    return (
+      <div>
+        <h2>Beheer Sensor Data</h2>
+        <input type="date" value={selectedDay} onChange={handleDayChange} />
+        <p>Deze dag bevat geen sensor data</p>
+      </div>
+    );
+  }
   return (
     <div>
       <h2>Beheer Sensor Data</h2>
       <input type="date" value={selectedDay} onChange={handleDayChange} />
-        {/* Add more options for other days here */}
-        
-          
-      
+      {/* Add more options for other days here */}
+
       {data && (
         <table>
           <thead>
@@ -61,11 +67,11 @@ const Manage = () => {
               <th>Action</th>
             </tr>
           </thead>
-          
+
           <tbody>
-            
+
             {data.map((item, index) => (
-              
+
               <tr key={index}>
                 <td>{item.data.time}</td>
                 <td>{item.data.tds}</td>
@@ -83,5 +89,4 @@ const Manage = () => {
     </div>
   );
 }
-
 export default Manage;
