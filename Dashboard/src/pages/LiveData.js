@@ -78,7 +78,6 @@ const LiveData = () => {
           <p>{ph} pH</p>
         </div>
       </div>
-      {/* other data... */}
       <div style={{ fontSize: '50px', textAlign: 'left', marginTop: '20px' }}>
         🏊‍♂️ {temperature > 20 ? '❗' : '✅'}
       </div>
