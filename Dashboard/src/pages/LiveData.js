@@ -25,7 +25,7 @@ const LiveData = () => {
 
   const handleSaveClick = () => {
     console.log(editedTextBatt, editedTextOxygen, editedTextTemp);
-    if (editedTextBatt != '' && editedTextOxygen != '' && editedTextTemp != '') {
+    if (editedTextBatt !== '' && editedTextOxygen !== '' && editedTextTemp !== '') {
       fetch(`https://aquathermie.tilaa.cloud:1880/delete/sensorlimits/`, {
         method: 'DELETE',
         headers: {
