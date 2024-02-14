@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const LiveData = () => {
+  const { isAuthenticated } = useAuth0();
   const [temperature, setTemperature] = useState(null);
   const [tds, setTds] = useState(null);
   const [oxygen, setOxygen] = useState(null);
@@ -10,6 +12,59 @@ const LiveData = () => {
   const [battery, setBattery] = useState(null);
   const [predictedTemperature, setPredictedTemperature] = useState(null);
   const [predictionDate, setPredictionDate] = useState(null);
+  const [textTemp, setTextTemp] = useState(null);
+  const [textOxygen, setTextOxygen] = useState(null);
+  const [textBatt, setTextBatt] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  const [editedTextTemp, setEditedTextTemp] = useState('');
+  const [editedTextOxygen, setEditedTextOxygen] = useState('');
+  const [editedTextBatt, setEditedTextBatt] = useState('');
+  const handleEditClick = () => {
+    setEditMode(true);
+  };
+
+  const handleSaveClick = () => {
+    console.log(editedTextBatt, editedTextOxygen, editedTextTemp);
+    if (editedTextBatt != '' && editedTextOxygen != '' && editedTextTemp != '') {
+      fetch(`https://aquathermie.tilaa.cloud:1880/delete/sensorlimits/`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify([{ temperatuurLimit: textTemp }]),
+      })
+        .then(response => {
+          if (response.ok) {
+            console.log('Row deleted successfully');
+          } else {
+            console.error('Failed to delete row. Server returned:', response.status);
+          }
+        })
+        .catch(error => console.error('Error:', error));
+
+
+      fetch('https://aquathermie.tilaa.cloud:1880/post/sensorlimits', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify([[{ temperatuurLimit: editedTextTemp, OxygenLimit: editedTextOxygen, BatteryLimit: editedTextBatt }]]),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('POST Success:', data);
+        })
+        .catch(error => {
+          console.error('POST Error:', error);
+        });
+      setTextOxygen(editedTextOxygen);
+      setTextTemp(editedTextTemp);
+      setTextBatt(editedTextBatt);
+      setEditMode(false);
+    } else {
+      alert("Waardes niet ingevuld")
+    }
+  };
 
   useEffect(() => {
     fetch('https://aquathermie.tilaa.cloud:1880/get/sensordata')
@@ -27,7 +82,6 @@ const LiveData = () => {
         const mostRecentBattery = data[data.length - 1].data.battery;
 
         mostRecentDate = mostRecentDate.replace(/T/g, " ");
-        //mostRecentDate = mostRecentDate.replace(/:([^:]+)$/g, "");
         mostRecentDate = format(new Date(mostRecentDate), 'dd MMM yyyy HH:mm')
         setTemperature(mostRecentTemperature);
         setTds(mostRecentTds);
@@ -51,11 +105,60 @@ const LiveData = () => {
       })
       .catch(error => console.error('Error:', error));
 
+    fetch('https://aquathermie.tilaa.cloud:1880/get/sensorlimits/')
+      .then(response => response.json())
+      .then(data => {
+        const mostRecentEntry = data[data.length - 1];
+        if (mostRecentEntry) {
+          setTextTemp(mostRecentEntry.temperatuurLimit);
+          setTextOxygen(mostRecentEntry.OxygenLimit);
+          setTextBatt(mostRecentEntry.BatteryLimit);
+        }
+      })
+      .catch(error => console.error('Error:', error));
+
   }, []);
 
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1 style={{ color: '#333' }}>Live data</h1>
+      <h1 style={{ color: '#333' }}>Live data
+        {isAuthenticated && (
+          <>
+            {!editMode && <button className="log" onClick={handleEditClick}>Bewerk</button>}
+            {editMode && (
+              <button className="log" onClick={handleSaveClick}>Opslaan</button>
+            )}
+          </>
+        )}
+      </h1>
+      {editMode && (
+        <>
+          <div>
+            <h3>Blauwalg temperatuur</h3>
+            <input
+              type="number"
+              value={editedTextTemp}
+              onChange={(e) => setEditedTextTemp(e.target.value)}
+            />
+          </div>
+          <div>
+            <h3>Zuurstofgehalte vissen</h3>
+            <input
+              type="number"
+              value={editedTextOxygen}
+              onChange={(e) => setEditedTextOxygen(e.target.value)}
+            />
+          </div>
+          <div>
+            <h3>Batterij leeg limiet</h3>
+            <input
+              type="number"
+              value={editedTextBatt}
+              onChange={(e) => setEditedTextBatt(e.target.value)}
+            />
+          </div>
+        </>
+      )}
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
         <div>
           <h3>Datum</h3>
@@ -79,24 +182,24 @@ const LiveData = () => {
         </div>
       </div>
       <div style={{ fontSize: '50px', textAlign: 'left', marginTop: '20px' }}>
-        🏊‍♂️ {temperature > 20 ? '❗' : '✅'}
+        🏊‍♂️ {temperature > textTemp ? '❗' : '✅'}
       </div>
       <div style={{ fontSize: '20px', textAlign: 'left', marginTop: '20px' }}>
-        {temperature > 20 ? 'Het water is warmer dan 20 °C dus er is kans op aanwezigheid van blauwalg in het water.' :
-          'Het water is kouder dan 20 °C Er is weinig kans op aanwezigheid van blauwalg in het water.'}
+        {temperature > textTemp ? 'Het water is warmer dan ' + textTemp + ' °C dus er is kans op aanwezigheid van blauwalg in het water.' :
+          'Het water is kouder dan ' + textTemp + ' °C Er is weinig kans op aanwezigheid van blauwalg in het water.'}
       </div>
       <div style={{ fontSize: '50px', textAlign: 'left', marginTop: '20px' }}>
-        🐠 {oxygen < 3 ? '❗' : '✅'}
+        🐠 {oxygen < textOxygen ? '❗' : '✅'}
       </div>
       <div style={{ fontSize: '20px', textAlign: 'left', marginTop: '20px' }}>
-        {oxygen < 3 ? 'Het zuurstof niveau is lager dan 3 mg/L, vissen kunnen hier moeilijk in overleven.' :
-          'Het zuurstof niveau is hoger dan 3 mg/L, vissen kunnen hier in overleven.'}
+        {oxygen < textOxygen ? 'Het zuurstof niveau is lager dan ' + textOxygen + ' mg/L, vissen kunnen hier moeilijk in overleven.' :
+          'Het zuurstof niveau is hoger dan ' + textOxygen + ' mg/L, vissen kunnen hier in overleven.'}
       </div>
       <div style={{ fontSize: '50px', textAlign: 'left', marginTop: '20px' }}>
-        {battery < 20 ? '🔌' : '🔋'}{battery} %
+        {battery < textBatt ? '🔌' : '🔋'}{battery} %
       </div>
       <div style={{ fontSize: '20px', textAlign: 'left', marginTop: '20px' }}>
-        {battery < 20 ? 'De batterij van de boei is bijna leeg.' :
+        {battery < textBatt ? 'De batterij van de boei is bijna leeg.' :
           'De batterij van de boei is vol genoeg.'}
       </div>
       <div>
