@@ -12,27 +12,27 @@ const Navbar = () => {
     <header>
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div style={{ width: '50%', display: 'flex', alignItems: 'center' }}>
-          <img src={logo} alt="Druppel" style={{ marginRight: '10px', width: '250px' }} />
+          <img src={logo} id="logo" alt="Druppel" />
           <Link to="/Home" className="link">
-            <h1>
+            <h1 id="aquathermieTitel">
               Aquathermie Den Bosch
             </h1>
           </Link>
         </div>
-        <div style={{ width: '50%', display: 'flex', justifyContent: 'flex-end' }}>
-          <Link to="/GraphData" style={{ marginRight: '20px' }} className="link">
+        <div id="grafiek"style={{  }}>
+          <Link to="/GraphData"  className="link">
             <h3>
               Grafiek Data
             </h3>
           </Link>
-          <Link to="/LiveData" style={{ marginRight: '20px' }} className="link">
+          <Link to="/LiveData"  className="link">
             <h3>
               Live Data
             </h3>
           </Link>
           {isAuthenticated && (
             <>
-              <Link to="/Manage" style={{ marginRight: '20px' }} className="link">
+              <Link to="/Manage" className="link">
                 <h3>
                   Beheer
                 </h3>
@@ -46,11 +46,11 @@ const Navbar = () => {
           )}
           {isAuthenticated && (
             <>
-              <div style={{ marginRight: '10px', marginTop: '15px' }}>
+              <div style={{  }}>
                 <LogoutButton />
               </div>
-              <Link to="/Profile" style={{ marginRight: '20px' }} className="link">
-                <h4>
+              <Link to="/Profile" style={{  }} className="link">
+                <h4 style={{marginTop:"-15px" }}>
                   <Profile />
                 </h4>
               </Link>

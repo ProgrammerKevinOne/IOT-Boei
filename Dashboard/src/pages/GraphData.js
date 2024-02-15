@@ -4,6 +4,7 @@ import { Line } from 'react-chartjs-2';
 import { Chart, LineController, CategoryScale, LinearScale, PointElement, LineElement, TimeSeriesScale } from 'chart.js';
 import { format } from 'date-fns';
 import 'chartjs-adapter-date-fns';
+import "../components/GraphData.css";
 
 
 
@@ -143,25 +144,25 @@ const GraphData = () => {
         <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
       </label>
     </div>
-    {<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', width: '45%' }}>
+    {<div id='Graph' >
+      <div  style={{ flexDirection: 'column', width: '80vw  ' }}>
         <div>
             <h3>TDS (ppm)</h3>
-          <Line data={tdsData} options={options} />
+          <Line data={tdsData} options={options} className='graphData' />
         </div>
         <div>
             <h3>Zuurtegraad (pH)</h3>
-          <Line data={phData} options={options} />
+          <Line data={phData} options={options} className='graphData' />
         </div>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', width: '45%' }}>
+      <div  style={{  flexDirection: 'column', width: '80vw' }}>
         <div>
             <h3>Temperatuur (°C)</h3>
-          <Line data={temperatureData} options={options} />
+          <Line data={temperatureData} options={options} className='graphData' />
         </div>
         <div>
             <h3>Zuurstofgehalte (mg/L)</h3>
-          <Line data={oxygenData} options={options} />
+          <Line data={oxygenData} options={options} className='graphData' />
         </div>
       </div>
     </div>}

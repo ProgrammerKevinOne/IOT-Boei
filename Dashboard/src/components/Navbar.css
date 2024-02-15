@@ -1,33 +1,120 @@
+/* Navbar */
+header {
+  background-color: #fff;
+  padding: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+#logo
+{
+  width: 250px;
+}
+
+
+.logo img {
+  width: 150px; /* Reduce logo size for smaller screens */
+}
+
+.link {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+}
+
 .link:hover {
-    color: rgb(23, 135, 226); /* Change this to your desired hover color */
-    
+  color: rgb(23, 135, 226);
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 8px 16px; /* Reduce button padding */
+  transition: background-color 0.4s, box-shadow 0.4s;
+}
+
+.reg, .log {
+  color: white;
+  background-color: rgb(23, 135, 226);
+}
+
+.log {
+  color: rgb(23, 135, 226);
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(23, 135, 226);
+}
+
+button:hover {
+  color: white;
+  background-color: rgba(23, 135, 226);
+  box-shadow: 0 0 20px rgba(23, 135, 226, 0.6);
+}
+#grafiek {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.link {
+  margin-right: 20px;
+}
+#aquathermieTitel
+{
+  margin-top:-5px;
+}
+.link h3 {
+  margin: 0;
+}
+
+#grafiek > * {
+  margin-right: 20px;
+}
+
+#grafiek > *:last-child {
+  margin-right: 0;
+}
+/* Responsive */
+@media screen and (max-width: 968px) {
+  .container {
+    flex-direction: column;
+    padding: 0 10px;
+  }
+  h1
+  {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .link {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .link:last-child {
+    margin-bottom: 0;
   }
 
   button {
-    cursor: pointer;
-    border: 0;
-    border-radius: 6px;
-    font-weight: 600;
-    margin: 0 10px;
-    width: 100px;
-    padding: 10px 0;
-    box-shadow: 0 0 20px rgba(0, 76, 255, 0.2);
-    transition: 0.4s;
+    margin: 0;
+    width: 100%;
   }
-  
-  .reg {
-    color: white;
-    background-color: rgb(23, 135, 226);
-  }
-  
-  .log {
-    color: rgb(23, 135, 226);
-    background-color: rgba(255, 255, 255, 1);
-    border: 1px solid rgba(23, 135, 226);
-  }
-  
-  button:hover {
-    color: white;
-    box-shadow: 0 0 20px rgba(23, 135, 226, 0.6);
-    background-color: rgba(23, 135, 226);
+
+  #logo {
+    width: 25vw; /* Further reduce logo size for smaller screens */
+    margin-right: 0;
+    margin-left: -100px;  }
+    #grafiek
+    {
+      display: block;
+      justify-content:unset;
+    }
   }
