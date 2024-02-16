@@ -24,7 +24,6 @@ const LiveData = () => {
   };
 
   const handleSaveClick = () => {
-    console.log(editedTextBatt, editedTextOxygen, editedTextTemp);
     if (editedTextBatt !== '' && editedTextOxygen !== '' && editedTextTemp !== '') {
       fetch(`https://aquathermie.tilaa.cloud:1880/delete/sensorlimits/`, {
         method: 'DELETE',
@@ -53,17 +52,22 @@ const LiveData = () => {
         .then(response => response.json())
         .then(data => {
           console.log('POST Success:', data);
+          setTextOxygen(editedTextOxygen);
+          setTextTemp(editedTextTemp);
+          setTextBatt(editedTextBatt);
         })
         .catch(error => {
           console.error('POST Error:', error);
+          alert(error);
         });
-      setTextOxygen(editedTextOxygen);
-      setTextTemp(editedTextTemp);
-      setTextBatt(editedTextBatt);
       setEditMode(false);
     } else {
       alert("Waardes niet ingevuld")
     }
+  };
+
+  const handleCancelClick = () => {
+    setEditMode(false);
   };
 
   useEffect(() => {
@@ -124,9 +128,12 @@ const LiveData = () => {
       <h1 style={{ color: '#333' }}>Live data
         {isAuthenticated && (
           <>
-            {!editMode && <button className="log" onClick={handleEditClick}>Bewerk</button>}
+            {!editMode && <button style={{marginLeft: '1em'}} className="log" onClick={handleEditClick}>Bewerk</button>}
             {editMode && (
-              <button className="log" onClick={handleSaveClick}>Opslaan</button>
+              <>
+                <button style={{marginLeft: '1em'}} className="log" onClick={handleSaveClick}>Opslaan</button>
+                <button style={{marginLeft: '1em'}} className="reg" onClick={handleCancelClick}>Annuleren</button>
+              </>
             )}
           </>
         )}
@@ -161,24 +168,24 @@ const LiveData = () => {
       )}
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
         <div>
-          <h3 style={{ fontSize:"1.5vw"}}>Datum</h3>
-          <p style={{ fontSize:"2vw"}}>{date}</p>
+          <h3 style={{ fontSize: "1.5vw" }}>Datum</h3>
+          <p style={{ fontSize: "2vw" }}>{date}</p>
         </div>
         <div>
-          <h3 style={{ fontSize:"1.5vw"}}>Water temperatuur</h3>
-          <p style={{ fontSize:"2vw"}}>{temperature} °C</p>
+          <h3 style={{ fontSize: "1.5vw" }}>Water temperatuur</h3>
+          <p style={{ fontSize: "2vw" }}>{temperature} °C</p>
         </div>
         <div>
-          <h3 style={{ fontSize:"1.5vw"}}>Totaal opgeloste vaste stoffen (TDS)</h3>
-          <p style={{ fontSize:"2vw"}}>{tds} ppm</p>
+          <h3 style={{ fontSize: "1.5vw" }}>Totaal opgeloste vaste stoffen (TDS)</h3>
+          <p style={{ fontSize: "2vw" }}>{tds} ppm</p>
         </div>
         <div>
-          <h3 style={{ fontSize:"1.5vw"}}>Zuurstofgehalte</h3>
-          <p style={{ fontSize:"2vw"}}>{oxygen} mg/L</p>
+          <h3 style={{ fontSize: "1.5vw" }}>Zuurstofgehalte</h3>
+          <p style={{ fontSize: "2vw" }}>{oxygen} mg/L</p>
         </div>
         <div>
-          <h3 style={{ fontSize:"1.5vw"}}>Zuurtegraad</h3>
-          <p style={{ fontSize:"2vw"}}>{ph} pH</p>
+          <h3 style={{ fontSize: "1.5vw" }}>Zuurtegraad</h3>
+          <p style={{ fontSize: "2vw" }}>{ph} pH</p>
         </div>
       </div>
       <div style={{ fontSize: '50px', textAlign: 'left', marginTop: '20px' }}>
