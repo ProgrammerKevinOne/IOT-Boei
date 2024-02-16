@@ -4,9 +4,9 @@ const Home = () => {
   return (
     <>
 
-<div style={{ display: window.innerWidth < 768 ? 'block' : 'flex', width: "95%"}}>
+<div id='HomeText' >
         <div style={{marginRight: '50px'}}>
-          <img src={water} alt="Water" style={{ width:'50vw', height: 'auto'}} />
+          <img id='img' src={water} alt="Water"  />
         </div>
         <div>
           <p style={{ height: 'auto' }}>
