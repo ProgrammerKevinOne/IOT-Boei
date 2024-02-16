@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { useAuth0 } from "@auth0/auth0-react";
-
+import "../components/livedata.css";
 const LiveData = () => {
   const { isAuthenticated } = useAuth0();
   const [temperature, setTemperature] = useState(null);
@@ -166,26 +166,26 @@ const LiveData = () => {
           </div>
         </>
       )}
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+      <div id='liveData' style={{ justifyContent: 'space-between', marginBottom: '10px' }}>
         <div>
-          <h3 style={{ fontSize: "1.5vw" }}>Datum</h3>
-          <p style={{ fontSize: "2vw" }}>{date}</p>
+          <h3 >Datum</h3>
+          <p >{date}</p>
         </div>
         <div>
-          <h3 style={{ fontSize: "1.5vw" }}>Water temperatuur</h3>
-          <p style={{ fontSize: "2vw" }}>{temperature} °C</p>
+          <h3 >Water temperatuur</h3>
+          <p >{temperature} °C</p>
         </div>
         <div>
-          <h3 style={{ fontSize: "1.5vw" }}>Totaal opgeloste vaste stoffen (TDS)</h3>
-          <p style={{ fontSize: "2vw" }}>{tds} ppm</p>
+          <h3 >Totaal opgeloste vaste stoffen (TDS)</h3>
+          <p >{tds} ppm</p>
         </div>
         <div>
-          <h3 style={{ fontSize: "1.5vw" }}>Zuurstofgehalte</h3>
-          <p style={{ fontSize: "2vw" }}>{oxygen} mg/L</p>
+          <h3 >Zuurstofgehalte</h3>
+          <p >{oxygen} mg/L</p>
         </div>
         <div>
-          <h3 style={{ fontSize: "1.5vw" }}>Zuurtegraad</h3>
-          <p style={{ fontSize: "2vw" }}>{ph} pH</p>
+          <h3 >Zuurtegraad</h3>
+          <p >{ph} pH</p>
         </div>
       </div>
       <div style={{ fontSize: '50px', textAlign: 'left', marginTop: '20px' }}>

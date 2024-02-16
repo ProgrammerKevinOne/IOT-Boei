@@ -1,0 +1,11 @@
+#liveData
+{
+    display: flex
+}
+@media screen and (max-width: 968px) {
+    #liveData
+    {
+      display: block;
+      
+    }
+}
