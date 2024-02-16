@@ -16,7 +16,7 @@ const GraphData = () => {
   const [error, setError] = useState(null);
   const [startDate, setStartDate] = useState('2024-01-01');
   const [endDate, setEndDate] = useState(new Date().toISOString().split('T')[0]);
-  
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,11 +47,11 @@ const GraphData = () => {
     fetchData();
   }, [startDate, endDate]);
 
-  
+
   if (loading === true) {
     return <p>Loading.</p>;
   }
-  
+
 
   if (error) {
     return <p>Error: Failed to fetch sensor data. Please try again later.</p>;
@@ -66,9 +66,9 @@ const GraphData = () => {
         fill: false,
         backgroundColor: 'rgb(75, 192, 192)',
         borderColor: 'rgba(128, 128, 128, 0.8)',
-        pointRadius: 5, // Adjust point size
+        pointRadius: 3, // Adjust point size
         pointBackgroundColor: 'dark-grey', // Adjust point color
-        
+
       },
     ],
   };
@@ -82,9 +82,9 @@ const GraphData = () => {
         fill: false,
         backgroundColor: 'rgb(75, 192, 192)',
         borderColor: 'rgba(128, 128, 128, 0.8)',
-        pointRadius: 5, // Adjust point size
+        pointRadius: 3, // Adjust point size
         pointBackgroundColor: 'dark-grey', // Adjust point color
-        
+
       },
     ],
   };
@@ -98,9 +98,9 @@ const GraphData = () => {
         fill: false,
         backgroundColor: 'rgb(75, 192, 192)',
         borderColor: 'rgba(128, 128, 128, 0.8)',
-        pointRadius: 5, // Adjust point size
+        pointRadius: 3, // Adjust point size
         pointBackgroundColor: 'dark-grey', // Adjust point color
-        
+
       },
     ],
   };
@@ -114,9 +114,9 @@ const GraphData = () => {
         fill: false,
         backgroundColor: 'rgb(75, 192, 192)',
         borderColor: 'rgba(128, 128, 128, 0.8)',
-        pointRadius: 5, // Adjust point size
+        pointRadius: 3, // Adjust point size
         pointBackgroundColor: 'dark-grey', // Adjust point color
-        
+
       },
     ],
   };
@@ -134,40 +134,40 @@ const GraphData = () => {
 
   return (
     <div>
-    <div>
-      <label>
-        Start Datum: &nbsp;
-        <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
-      </label>
-      <label>
-      &nbsp;Eind Datum: &nbsp;
-        <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
-      </label>
-    </div>
-    {<div id='Graph' >
-      <div  style={{ flexDirection: 'column', width: '80vw  ' }}>
-        <div>
+      <div>
+        <label>
+          Start Datum: &nbsp;
+          <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
+        </label>
+        <label>
+          &nbsp;Eind Datum: &nbsp;
+          <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
+        </label>
+      </div>
+      {<div id='Graph' >
+        <div style={{ flexDirection: 'column', width: '80vw  ' }}>
+          <div >
             <h3>TDS (ppm)</h3>
-          <Line data={tdsData} options={options} className='graphData' />
-        </div>
-        <div>
+            <Line className='graphData' data={tdsData} options={options} />
+          </div>
+          <div>
             <h3>Zuurtegraad (pH)</h3>
-          <Line data={phData} options={options} className='graphData' />
+            <Line data={phData} options={options} />
+          </div>
         </div>
-      </div>
-      <div  style={{  flexDirection: 'column', width: '80vw' }}>
-        <div>
+        <div style={{ flexDirection: 'column', width: '80vw' }}>
+          <div>
             <h3>Temperatuur (°C)</h3>
-          <Line data={temperatureData} options={options} className='graphData' />
-        </div>
-        <div>
+            <Line data={temperatureData} options={options} className='graphData' />
+          </div>
+          <div>
             <h3>Zuurstofgehalte (mg/L)</h3>
-          <Line data={oxygenData} options={options} className='graphData' />
+            <Line data={oxygenData} options={options} className='graphData' />
+          </div>
         </div>
-      </div>
-    </div>}
-  </div>
-    
+      </div>}
+    </div>
+
   );
 };
 

@@ -1,16 +1,19 @@
-#Graph
-{
-    display:flex;
-    
+#Graph {
+    display: flex;
+
 }
-.graphData
-{
+
+.graphData {
     width: 25vw;
     height: 25vw;
 }
+
 @media screen and (max-width: 968px) {
     #Graph {
-      display: block;
-      
+        display: block;
+        
+    }
+    .graphData {
+        height: 50vw;
     }
 }

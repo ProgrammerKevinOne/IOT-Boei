@@ -1,4 +1,5 @@
-import water from '../assets/water.jpg'; // Adjust the path as needed
+import water from '../assets/water.jpg';
+import '../components/Home.css';
 
 const Home = () => {
   return (
