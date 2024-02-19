@@ -141,7 +141,7 @@ const LiveData = () => {
       {editMode && (
         <>
           <div>
-            <h3>Blauwalg temperatuur</h3>
+            <h3>Blauwalg temperatuur:</h3>
             <input
               type="number"
               value={editedTextTemp}
@@ -149,7 +149,7 @@ const LiveData = () => {
             />
           </div>
           <div>
-            <h3>Zuurstofgehalte vissen</h3>
+            <h3>Zuurstofgehalte vissen:</h3>
             <input
               type="number"
               value={editedTextOxygen}
@@ -157,7 +157,7 @@ const LiveData = () => {
             />
           </div>
           <div>
-            <h3>Batterij leeg limiet</h3>
+            <h3>Batterij leeg limiet:</h3>
             <input
               type="number"
               value={editedTextBatt}
